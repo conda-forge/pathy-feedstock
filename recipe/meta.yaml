@@ -11,7 +11,7 @@ source:
   patches: patches/0001-setup-requirements.patch
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
