@@ -11,22 +11,29 @@ source:
   patches: patches/0001-setup-requirements.patch
 
 build:
-  number: 2
+  number: 3
+  noarch: python
   script: {{ PYTHON }} -m pip install . -vv
+  entry_points:
+    - pathy=pathy.cli:app
 
 requirements:
   host:
-    - python
+    - python >=3.6
     - pip
   run:
-    - python
+    - python >=3.6
     - smart_open >=2.2.0,<4.0.0
     - typer >=0.3.0,<1.0.0
-    - dataclasses >=0.6,<1.0  # [py<=36]
+    - dataclasses >=0.6,<1.0
 
 test:
   imports:
     - {{ name }}
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/justindujardin/pathy
