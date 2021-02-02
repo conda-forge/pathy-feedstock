@@ -6,27 +6,37 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: f6a85eb21d4284503fceaa1a6767e736c8b02b57e19a3de4d83a8e054bcbf18a
-  patches: patches/0001-setup-requirements.patch
+  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    sha256: f6a85eb21d4284503fceaa1a6767e736c8b02b57e19a3de4d83a8e054bcbf18a
+  # TODO: remove after https://github.com/justindujardin/pathy/pull/45
+  - url: https://raw.githubusercontent.com/justindujardin/pathy/v{{ version }}/requirements.txt
+    sha256: 951d055b16ffc5e98852cd1a61d7b1f34f866603667796c25f985d0c6c972658
 
 build:
-  number: 2
-  script: {{ PYTHON }} -m pip install . -vv
+  number: 3
+  noarch: python
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  entry_points:
+    - pathy=pathy.cli:app
 
 requirements:
   host:
-    - python
+    - python >=3.6
     - pip
   run:
-    - python
-    - smart_open >=2.2.0,<4.0.0
+    - python >=3.6
+    - smart_open >=2.2.0,<3.0.0
     - typer >=0.3.0,<1.0.0
-    - dataclasses >=0.6,<1.0  # [py<=36]
+    - dataclasses >=0.6,<1.0
 
 test:
   imports:
     - {{ name }}
+  requires:
+    - pip
+  commands:
+    - pip check
+    - pathy --help
 
 about:
   home: https://github.com/justindujardin/pathy
