@@ -15,7 +15,7 @@ source:
 build:
   number: 3
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
   entry_points:
     - pathy=pathy.cli:app
 
@@ -25,7 +25,7 @@ requirements:
     - pip
   run:
     - python >=3.6
-    - smart_open >=2.2.0,<4.0.0
+    - smart_open >=2.2.0,<3.0.0
     - typer >=0.3.0,<1.0.0
     - dataclasses >=0.6,<1.0
 
