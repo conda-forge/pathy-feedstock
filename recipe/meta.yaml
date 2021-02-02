@@ -1,5 +1,5 @@
 {% set name = "pathy" %}
-{% set version = "0.3.4" %}
+{% set version = "0.3.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,13 @@ package:
 
 source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-    sha256: f6a85eb21d4284503fceaa1a6767e736c8b02b57e19a3de4d83a8e054bcbf18a
+    sha256: 99008a80dc72eaf3f7adb25d3ad303f3b9586864eae62d684d5ba46c53dfa190
   # TODO: remove after https://github.com/justindujardin/pathy/pull/45
   - url: https://raw.githubusercontent.com/justindujardin/pathy/v{{ version }}/requirements.txt
     sha256: 951d055b16ffc5e98852cd1a61d7b1f34f866603667796c25f985d0c6c972658
 
 build:
-  number: 3
+  number: 0
   noarch: python
   script: {{ PYTHON }} -m pip install . --no-deps -vv
   entry_points:
