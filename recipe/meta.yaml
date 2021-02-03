@@ -8,9 +8,6 @@ package:
 source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: 99008a80dc72eaf3f7adb25d3ad303f3b9586864eae62d684d5ba46c53dfa190
-  # TODO: remove after https://github.com/justindujardin/pathy/pull/45
-  - url: https://raw.githubusercontent.com/justindujardin/pathy/v{{ version }}/requirements.txt
-    sha256: 951d055b16ffc5e98852cd1a61d7b1f34f866603667796c25f985d0c6c972658
 
 build:
   number: 0
