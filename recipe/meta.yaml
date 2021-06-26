@@ -24,7 +24,7 @@ requirements:
     - pip
   run:
     - python >=3.6
-    - smart_open >=2.2.0,<3.0.0
+    - smart_open >=5.0.0,<6.0.0
     - typer >=0.3.0,<1.0.0
     - dataclasses >=0.6,<1.0
 
