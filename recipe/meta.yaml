@@ -1,5 +1,5 @@
 {% set name = "pathy" %}
-{% set version = "0.6.2" %}
+{% set version = "0.7.1" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-    sha256: 3178215bdadf3741107d987020be0fb5b59888f60f96de43cce5fe45d9d4b64a
+    sha256: 898e8b6f5fc6c52a4eef1977ff913ae2a9f55f6ac35f1eb48cf95d8c014876c2
 
 
 build:
