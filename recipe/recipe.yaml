@@ -1,18 +1,18 @@
 schema_version: 1
 
 context:
-  version: "0.10.2"
+  version: "0.14.2"
 
 package:
   name: pathy
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/p/pathy/pathy-${{ version }}.tar.gz
-  sha256: 79c572ab7fed84dc46837346edae58565992d0477a789cd4691a41d8eab9917d
+  url: https://github.com/justindujardin/pathy/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: c954197a7d8cfc3336ea47d660b762b9565001d7be9b421efd0bd94c98da412c
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script: ${{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation
   python:
@@ -23,12 +23,12 @@ requirements:
   host:
     - python ${{ python_min }}.*
     - pip
-    - setuptools
+    - hatchling
   run:
     - python >=${{ python_min }}
-    - smart_open >=5.0.0,<6.0.0
-    - typer >=0.3.0,<1.0.0
-    - dataclasses >=0.6,<1.0
+    - pathlib-abc <0.6,>=0.5.2
+    - smart-open >=5.2.1
+    - typer >=0.3.0
 
 tests:
   - python:
@@ -38,12 +38,14 @@ tests:
       python_version:
         - ${{ python_min }}.*
         - '*'
-  - requirements:
-      run:
-        - pip
-        - python ${{ python_min }}.*
-    script:
+  - script:
       - pathy --help
+      - pytest -vvv --pyargs pathy._tests
+    requirements:
+      run:
+        - pytest
+        - pytest-cov
+        - python ${{ python_min }}.*
 
 about:
   license: Apache-2.0
