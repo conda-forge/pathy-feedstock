@@ -1,0 +1,68 @@
+schema_version: 1
+
+context:
+  version: "0.14.2"
+
+package:
+  name: pathy
+  version: ${{ version }}
+
+source:
+  url: https://github.com/justindujardin/pathy/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: c954197a7d8cfc3336ea47d660b762b9565001d7be9b421efd0bd94c98da412c
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation
+  python:
+    entry_points:
+      - pathy=pathy.cli:app
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - hatchling
+  run:
+    - python >=${{ python_min }}
+    - pathlib-abc <0.6,>=0.5.2
+    - smart-open >=5.2.1
+    - typer >=0.3.0
+
+tests:
+  - python:
+      imports:
+        - pathy
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - '*'
+  - script:
+      - pathy --help
+      - pytest -vvv --pyargs pathy._tests
+    requirements:
+      run:
+        - pytest
+        - pytest-cov
+        - python ${{ python_min }}.*
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: A Path interface for local and cloud bucket storage
+  description: |
+    Pathy is a python package (with type annotations) for working with Bucket
+    storage providers. It provides a CLI app for basic file operations between
+    local files and remote buckets. It enables a smooth developer experience by
+    supporting local file-system backed buckets during development and testing.
+    It makes converting bucket blobs into local files a snap with optional
+    local file caching of blobs.
+  homepage: https://github.com/justindujardin/pathy
+  repository: https://github.com/justindujardin/pathy
+  documentation: https://github.com/justindujardin/pathy
+
+extra:
+  recipe-maintainers:
+    - conda-forge/spacy
+    - justindujardin
